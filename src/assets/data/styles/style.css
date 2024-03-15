@@ -1,0 +1,8 @@
+/* custom.css */
+.login-button {
+    background-color: #B68847; /* Change this to the desired color */
+    color: #ffffff; /* Text color */
+    border-radius: 8px;
+   
+    /* Add any other styles as needed */
+}

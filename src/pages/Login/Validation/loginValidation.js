@@ -23,6 +23,7 @@ function validation(values) {
   } else {
     error.password = ""
   }
+  console.log(error)
   return error
 }
 

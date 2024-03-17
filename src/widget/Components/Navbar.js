@@ -39,7 +39,7 @@ function Navbar() {
         <a href="/cart" className="navbar-brand">
           <FontAwesomeIcon icon={faCartShopping} />
         </a>
-        <a href="/user" className="navbar-brand">
+        <a href="/profile" className="navbar-brand">
           <FontAwesomeIcon icon={faUser} />
         </a>
         </div>

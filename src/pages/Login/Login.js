@@ -3,42 +3,42 @@ import loginImage from "../../assets/data/images/login.png";
 import "../../assets/data/styles/style.css";
 import validation from "../Login/Validation/loginValidation.js";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 
 function Login() {
   const [values, setValues] = useState({
     email: "",
     password: "",
-  })
+  });
   const navigate = useNavigate();
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
   const handleInput = (event) => {
-    setValues(prev => ({
+    const { name, value } = event.target;
+    setValues((prev) => ({
       ...prev,
-      [event.target.name]: [event.target.value]
-    }))
-  }
+      [name]: value,
+    }));
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrors(validation(values));
-    if (
-
-      errors.email === "" &&
-     
-      errors.password === ""
-    ) {
+    if (errors.email === "" && errors.password === "") {
       axios
         .post("http://localhost:8081/api/v1/login", values)
-        .then(res => {
-          if(res.data==="success"){
-            navigate('/home');
-          }else{
-            alert("No record found in database")
+
+        .then((res) => {
+          if (!res.data.success) {
+            let error = {};
+            error.email = res.data.message;
+            setErrors(error);
+          } else {
+            localStorage.setItem("userToken", res.data.token);
+            navigate("/home");
           }
         })
         .catch((err) => console.log(err));
     }
-  }
+  };
 
   return (
     <div className="container-fluid">
@@ -70,8 +70,9 @@ function Login() {
                 name="email"
                 onChange={handleInput}
               />
-                {errors.email && <span className="text-danger">{errors.email}</span>}
-             
+              {errors.email && (
+                <span className="text-danger">{errors.email}</span>
+              )}
             </div>
 
             {/* password field */}
@@ -83,7 +84,9 @@ function Login() {
                 name="password"
                 onChange={handleInput}
               />
-              {errors.password && <span className="text-danger">{errors.password}</span>}
+              {errors.password && (
+                <span className="text-danger">{errors.password}</span>
+              )}
             </div>
 
             {/* terms and policies */}
@@ -105,7 +108,6 @@ function Login() {
         </div>
       </div>
     </div>
-    
   );
 }
 

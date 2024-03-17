@@ -39,7 +39,7 @@ function Signup() {
       axios
         .post("http://localhost:8081/api/v1/signup", values)
         .then(res => {
-          navigate('/login');
+          navigate('/');
         })
         .catch((err) => console.log(err));
     }

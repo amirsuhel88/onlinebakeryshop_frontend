@@ -6,22 +6,28 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./pages/Signup/Signup.js";
 import Home from "./pages/Home/Home.js";
 import Profile from "./pages/Profile/Profile.js";
+import { AuthProvider } from "./context.js/AuthContext.js";
+import Category from "./pages/Category/Category.js";
+import Cart from "./pages/Cart/Cart.js";
 
 function App() {
   return (
-    <div className="page-container">
-      <div className="conent-wrap">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Login />}></Route>
-            <Route path="/signup" element={<Signup />}></Route>
-            <Route path="/home" element={<Home />}></Route>
-            <Route path="/profile" element={<Profile />}></Route>
-
-          </Routes>
-        </BrowserRouter>
+    <AuthProvider>
+      <div className="page-container">
+        <div className="conent-wrap">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/signup" element={<Signup />}></Route>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/profile" element={<Profile />}></Route>
+              <Route path="/category" element={<Category />}></Route>
+              <Route path="/cart" element={<Cart />}></Route>
+            </Routes>
+          </BrowserRouter>
+        </div>
       </div>
-    </div>
+    </AuthProvider>
   );
 }
 

@@ -4,7 +4,8 @@ import "../../assets/data/styles/style.css";
 import validation from "../Login/Validation/loginValidation.js";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { useAuth } from "../../context.js/AuthContext";
+/*
 function Login() {
   const [values, setValues] = useState({
     email: "",
@@ -33,12 +34,53 @@ function Login() {
             setErrors(error);
           } else {
             localStorage.setItem("userToken", res.data.token);
-            navigate("/home");
+            navigate("/");
           }
         })
         .catch((err) => console.log(err));
     }
   };
+
+*/
+function Login() {
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+  const { login } = useAuth(); // Access login function from context
+  const [errors, setErrors] = useState({});
+
+  const handleInput = (event) => {
+    const { name, value } = event.target;
+    setValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setErrors(validation(values));
+    if (errors.email === "" && errors.password === "") {
+      axios
+        .post("http://localhost:8081/api/v1/login", values)
+        .then((res) => {
+          if (!res.data.success) {
+            let error = {};
+            error.email = res.data.message;
+            setErrors(error);
+          } else {
+            localStorage.setItem("userToken", res.data.token);
+            login(res.data.token); // Set token using login function from context
+            navigate("/");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+
 
   return (
     <div className="container-fluid">

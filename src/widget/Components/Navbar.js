@@ -11,12 +11,12 @@ function Navbar() {
     <nav className="navbar ">
       <div className="container-fluid">
         <div>
-          <a href="/home" className="navbar-brand">
+          <a href="/" className="navbar-brand">
             <FontAwesomeIcon icon={faBreadSlice} />
           </a>
         </div>
         <div>
-        <a href="/home" className="navbar-brand" style={{ color: 'white' }}>
+        <a href="/" className="navbar-brand" style={{ color: 'white' }}>
            home
         </a>
 

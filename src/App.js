@@ -9,6 +9,7 @@ import Profile from "./pages/Profile/Profile.js";
 import { AuthProvider } from "./context.js/AuthContext.js";
 import Category from "./pages/Category/Category.js";
 import Cart from "./pages/Cart/Cart.js";
+import AllProducts from './pages/Products/AllProducts.js'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="/profile" element={<Profile />}></Route>
               <Route path="/category" element={<Category />}></Route>
               <Route path="/cart" element={<Cart />}></Route>
+              <Route path = "/allproducts" element= {<AllProducts/>}></Route>
             </Routes>
           </BrowserRouter>
         </div>
